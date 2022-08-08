@@ -1,14 +1,16 @@
 import { Controller, Get, Param } from '@nestjs/common';
+import { CarsService } from './cars.service';
 
 
 @Controller('cars')
 export class CarsController {
 
-    private cars = ['Toyota','Honda','Jeep']
+
+    constructor( private readonly carsService: CarsService ){}
 
     @Get()
     getAllCars(){
-        return this.cars
+        return this.carsService.findAll()
     }
 
     @Get(":id")
@@ -17,7 +19,7 @@ export class CarsController {
         
         return {
             id,
-            car: this.cars[1]
+            car: this.carsService.findOneById(+id)
         }
     }
 
