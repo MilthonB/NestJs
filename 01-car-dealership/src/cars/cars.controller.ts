@@ -28,7 +28,7 @@ export class CarsController {
     @Post()
     createCar( @Body() createCarDto: CreateCarDto ) {
         return {
-            createCarDto
+            car : this.carsService.create(createCarDto)
         }
     }
 

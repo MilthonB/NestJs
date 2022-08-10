@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { v4 as uuid } from "uuid";
+import { CreateCarDto } from './dto/create-car.dto';
 
 import { Car } from './interfaces/car.interface';
 
@@ -39,6 +40,32 @@ export class CarsService {
         
         return car
 
+    }
+
+
+    create (creteCarDto : CreateCarDto){
+
+        const car: Car = {
+            id: uuid(),
+            ...creteCarDto // operador
+        }  
+
+        // desestructuracion de createcaardto {}
+        // const car: Car = {
+        //     id: uuid(),
+        //     brand: brand,
+        //     model: model
+        // }  
+
+        // const car: Car = {
+        //     id: uuid(),
+        //     brand: creteCarDto.brand,
+        //     model: creteCarDto.model
+        // }  
+
+        this.cars.push(car)
+
+        return car;
     }
 
 }
