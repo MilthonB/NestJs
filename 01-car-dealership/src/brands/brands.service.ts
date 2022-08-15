@@ -68,14 +68,14 @@ export class BrandsService {
          
 
 
-    return `This action updates a #${id} brand`;
+    return brandsDB;
   }
 
   remove(id: string) {
     
     const brand = this.findOne(id)
 
-    this.brands.filter( brand => brand.id !== id )
+    this.brands = this.brands.filter( brand => brand.id !== id )
 
     return {
       id,
