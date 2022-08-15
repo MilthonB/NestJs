@@ -8,6 +8,8 @@ import { Car } from './interfaces/car.interface';
 @Injectable()
 export class CarsService {
 
+
+
     private cars: Car[] = [
         // {
         //     id:uuid(),
@@ -94,4 +96,11 @@ export class CarsService {
 
     }
 
+    fillCarsWithSeedData( cars: Car[]){
+        this.cars = cars
+    }
+
 }
+
+
+

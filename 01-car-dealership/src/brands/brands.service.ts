@@ -9,7 +9,7 @@ import { v4 as uuid } from "uuid";
 export class BrandsService {
 
 
-  private  brands: Brand[] = [
+  private brands: Brand[] = [
     // {
     //     id: uuid(),
     //     name:'Toyota',
@@ -22,7 +22,7 @@ export class BrandsService {
       id: uuid(),
       name: createBrandDto.name,
       createAt: new Date().getTime()
-      
+
     }
 
     this.brands.push(newBrand)
@@ -38,11 +38,11 @@ export class BrandsService {
 
   findOne(id: string) {
 
-    const brans = this.brands.find(  brand => brand.id === id );
-    if(!brans)
+    const brans = this.brands.find(brand => brand.id === id);
+    if (!brans)
       throw new NotFoundException('Id not is accept')
 
-      return brans
+    return brans
 
   }
 
@@ -51,10 +51,10 @@ export class BrandsService {
     let brandsDB: Brand = this.findOne(id)
 
     if (!brandsDB.id && brandsDB.id != id)
-        throw new NotFoundException("Is no valid");
-    
-    this.brands = this.brands.map( brand => {
-      if(brand.id == id){
+      throw new NotFoundException("Is no valid");
+
+    this.brands = this.brands.map(brand => {
+      if (brand.id == id) {
         brandsDB.updateAt = new Date().getTime()
         brandsDB = {
           ...brandsDB, ...updateBrandDto
@@ -65,17 +65,17 @@ export class BrandsService {
       return brand
 
     })
-         
+
 
 
     return brandsDB;
   }
 
   remove(id: string) {
-    
+
     const brand = this.findOne(id)
 
-    this.brands = this.brands.filter( brand => brand.id !== id )
+    this.brands = this.brands.filter(brand => brand.id !== id)
 
     return {
       id,
@@ -85,4 +85,11 @@ export class BrandsService {
 
 
   }
+
+
+
+  fillCarsWithSeedData(brands: Brand[]) {
+    this.brands = brands
+  }
+
 }
