@@ -88,7 +88,7 @@ export class BrandsService {
 
 
 
-  fillCarsWithSeedData(brands: Brand[]) {
+  fillbrandsWithSeedData(brands: Brand[]) {
     this.brands = brands
   }
 
