@@ -9,21 +9,11 @@ import { Car } from './interfaces/car.interface';
 export class CarsService {
 
     private cars: Car[] = [
-        {
-            id:uuid(),
-            brand: 'Toyota',
-            model: 'Corolla'
-        },
-        {
-            id:uuid(),
-            brand: 'Nissan',
-            model: 'NP300'
-        },
-        {
-            id:uuid(),
-            brand: 'Chevrolet',
-            model: 'S10'
-        },
+        // {
+        //     id:uuid(),
+        //     brand: 'Toyota',
+        //     model: 'Corolla'
+        // },
     ]
 
 
