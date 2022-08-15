@@ -73,7 +73,7 @@ export class CarsService {
 
         let carDB = this.findOneById(id);
 
-        if( updateCarDto.id && updateCarDto != id )
+        if( !updateCarDto.id && updateCarDto.id != id )
             throw new BadRequestException('Car id is not valid inside body')
 
         

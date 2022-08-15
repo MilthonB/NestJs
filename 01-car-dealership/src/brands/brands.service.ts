@@ -1,26 +1,88 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateBrandDto } from './dto/create-brand.dto';
 import { UpdateBrandDto } from './dto/update-brand.dto';
+import { Brand } from './entities/brand.entity';
+
+import { v4 as uuid } from "uuid";
 
 @Injectable()
 export class BrandsService {
+
+
+  private  brands: Brand[] = [
+    {
+        id: uuid(),
+        name:'Toyota',
+        createAt: new Date().getTime()
+    }
+  ];
+
   create(createBrandDto: CreateBrandDto) {
-    return 'This action adds a new brand';
+    const newBrand: Brand = {
+      id: uuid(),
+      name: createBrandDto.name,
+      createAt: new Date().getTime()
+      
+    }
+
+    this.brands.push(newBrand)
+
+    return {
+      ...createBrandDto
+    }
   }
 
   findAll() {
-    return `This action returns all brands`;
+    return this.brands
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} brand`;
+  findOne(id: string) {
+
+    const brans = this.brands.find(  brand => brand.id === id );
+    if(!brans)
+      throw new NotFoundException('Id not is accept')
+
+      return brans
+
   }
 
-  update(id: number, updateBrandDto: UpdateBrandDto) {
+  update(id: string, updateBrandDto: UpdateBrandDto) {
+
+    let brandsDB: Brand = this.findOne(id)
+
+    if (!brandsDB.id && brandsDB.id != id)
+        throw new NotFoundException("Is no valid");
+    
+    this.brands = this.brands.map( brand => {
+      if(brand.id == id){
+        brandsDB.updateAt = new Date().getTime()
+        brandsDB = {
+          ...brandsDB, ...updateBrandDto
+        }
+        return brandsDB
+      }
+
+      return brand
+
+    })
+         
+
+
     return `This action updates a #${id} brand`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} brand`;
+  remove(id: string) {
+    
+    const brand = this.findOne(id)
+
+    this.brands.filter( brand => brand.id !== id )
+
+    return {
+      id,
+      message: `Elemtn with id ${id} was delete DB`
+    }
+
+
+
   }
 }
