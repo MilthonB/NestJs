@@ -97,11 +97,23 @@ export class PokemonService {
 
   async remove(id: string) {
 
-    const pokemon = await this.findOne(id);
+    // const pokemon = await this.findOne(id);
 
-    await pokemon.deleteOne();
+    // await pokemon.deleteOne();
 
-    return `This action removes a #${id} pokemon`;
+    // const result = await this.pokemonModel.findByIdAndRemove(id) 
+    const { deletedCount } = await this.pokemonModel.deleteOne( {_id: id} )
+    // si es el deleteCount es 0 entonces entonces no se encontro 
+    // ningun registro
+    // Esto sucede porque se puede ingresar un mongoid eliminado y el
+    //estatus sera un 201 por lo tanto se hace este if
+    if ( deletedCount == 0  ) {
+      throw new BadRequestException(`Pokemon with id "${ id }" not found`)
+    }
+
+    
+
+    return ;
   }
 
 
