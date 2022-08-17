@@ -95,7 +95,12 @@ export class PokemonService {
     // return pokemon
   }
 
-  remove(id: number) {
+  async remove(id: string) {
+
+    const pokemon = await this.findOne(id);
+
+    await pokemon.deleteOne();
+
     return `This action removes a #${id} pokemon`;
   }
 
