@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 
 
 /** 
@@ -20,9 +20,25 @@ export class CarsController {
      * 
      */
 
-    @Get()
+    private car = ['toyota', 'honda', 'jeep'];
+
+    
     getAllCars(){
-        return ['toyota', 'honda', 'jeep'] 
+        return  this.car;
+    }
+
+
+    /**
+     * para recibir valores por url es decir valors desde el path se agrega de la siguiente manera
+     * localhost:3000/cars/1
+     * @Get(':id') asi con dos punto y el nombre que le asignas a lo que va a recibir
+     * el endpoint
+     * @param('id') asi le decimos al metodo que el valor que va a recibir viene sde e
+     * los params de la url
+     */
+    @Get(':id')
+    getCarById( @Param('id') id: string ){
+        return this.car[id];
     }
 
 }
