@@ -1,4 +1,5 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
+import { CarsService } from './cars.service';
 
 
 /** 
@@ -20,11 +21,14 @@ export class CarsController {
      * 
      */
 
-    private car = ['toyota', 'honda', 'jeep'];
-
     
+    constructor(
+        private  readonly carsService : CarsService 
+    ){}
+
+    @Get()
     getAllCars(){
-        return  this.car;
+        return  this.carsService.findAll();
     }
 
 
@@ -36,9 +40,17 @@ export class CarsController {
      * @param('id') asi le decimos al metodo que el valor que va a recibir viene sde e
      * los params de la url
      */
+
+    /**
+     * los pipes son utilies para trasnformar la data
+     * eso sirve para que estatus code se el correcto 
+     * por ejemploo  se se recib un string en lugar de un int 
+     * el pipe parseintpipe lo dfiltra y si ahy un error lo cuemtra en 
+     * ek estado code 400
+     */
     @Get(':id')
-    getCarById( @Param('id') id: string ){
-        return this.car[id];
+    getCarById( @Param('id', ParseIntPipe) id: number ){
+        return this.carsService.findOneById( id );
     }
 
 }
