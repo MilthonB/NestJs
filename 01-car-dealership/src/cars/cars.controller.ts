@@ -1,4 +1,4 @@
-import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { CarsService } from './cars.service';
 
 
@@ -21,7 +21,8 @@ export class CarsController {
      * 
      */
 
-    
+    //CRUD
+
     constructor(
         private  readonly carsService : CarsService 
     ){}
@@ -52,5 +53,39 @@ export class CarsController {
     getCarById( @Param('id', ParseIntPipe) id: number ){
         return this.carsService.findOneById( id );
     }
+
+    // Se utiliza para crear un recurso
+    @Post() 
+    createCar( @Body() body:any ){
+
+        return body;
+        // return {
+        //     id: 'ok',
+        //     method: 'POST'
+        // }
+    }
+
+    @Patch(':id')
+    UpdateCar( @Body() body:any ){
+
+        return body;
+        // return {
+        //     id: 'ok',
+        //     method: 'POST'
+        // }
+    }
+
+
+    @Delete(':id')
+    DeleteCar( @Param('id', ParseIntPipe) id:number ){
+
+        // return body;
+        return {
+            id,
+            method: 'DELETE'
+        }
+    }
+
+
 
 }
