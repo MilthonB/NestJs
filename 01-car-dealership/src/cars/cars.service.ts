@@ -1,22 +1,26 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { Car } from './interfaces/car.interface';
+import { v4 as uuid } from "uuid";
 
 @Injectable()
 export class CarsService {
 
 
-    private car = [
+    // Obligas a car que sea de tipo car y que cumpla con lo requerido
+
+    private car: Car[] = [
         {
-            id:1,
+            id:uuid(),
             brand:'Toyota',
             model: 'Corolla'
         },
         {
-            id:2,
+            id:uuid(),
             brand:'Honda',
             model: 'Civic'
         },
         {
-            id:3,
+            id:uuid(),
             brand:'Jeep',
             model: 'Chrokey'
         },
@@ -27,11 +31,11 @@ export class CarsService {
         return this.car;
     }
 
-    findOneById(id:number){
+    findOneById(id:string){
 
 
 
-        const car = this.car.find(car => car.id == id);
+        const car = this.car.find(car => car.id === id);
         
         if(!car){
             //mensaje de error 400 mas rapido en nest que en express node 
