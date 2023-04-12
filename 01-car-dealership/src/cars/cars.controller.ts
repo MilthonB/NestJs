@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, ParseUUIDPipe, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CarsService } from './cars.service';
+import { CreateCarDto } from './dto/create-car.dto';
 
 
 /** 
@@ -55,10 +56,10 @@ export class CarsController {
     }
 
     // Se utiliza para crear un recurso
-    @Post() 
-    createCar( @Body() body:any ){
+    @Post()
+    createCar( @Body() CreateCarDto: CreateCarDto ){
 
-        return body;
+        return CreateCarDto;
         // return {
         //     id: 'ok',
         //     method: 'POST'
