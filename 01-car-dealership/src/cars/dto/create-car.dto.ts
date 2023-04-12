@@ -1,5 +1,5 @@
 
-import { IsString } from "class-validator";
+import { IsString, MinLength } from "class-validator";
 
 /**
  * Los dto son la estructura el esquema de como se 
@@ -15,6 +15,7 @@ export class CreateCarDto{
 
 
     @IsString()
+    @MinLength(3)
     readonly model: string;
 
 }
