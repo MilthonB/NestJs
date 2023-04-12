@@ -73,7 +73,7 @@ export class CarsController {
         @Body() updateCarDto:UpdateCarDto 
         ){
 
-        return updateCarDto;
+        return this.carsService.update(id,updateCarDto);
         // return {
         //     id: 'ok',
         //     method: 'POST'
