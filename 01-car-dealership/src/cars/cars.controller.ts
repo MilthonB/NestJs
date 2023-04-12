@@ -57,9 +57,11 @@ export class CarsController {
 
     // Se utiliza para crear un recurso
     @Post()
-    createCar( @Body() CreateCarDto: CreateCarDto ){
+    createCar( @Body() createCarDto: CreateCarDto ){
 
-        return CreateCarDto;
+        // creacuib de carro
+        const newCar = this.carsService.create(createCarDto);
+        return newCar;
         // return {
         //     id: 'ok',
         //     method: 'POST'
