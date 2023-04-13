@@ -88,7 +88,7 @@ export class CarsService {
 
         const carDelete = this.findOneById(id);
 
-        this.car = this.car.filter( car => car.id != id)
+        this.car = this.car.filter( car => car.id !== id)
 
         return carDelete
 
