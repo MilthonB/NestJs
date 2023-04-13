@@ -3,6 +3,10 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // se agregan los pefijos para a todos los controladoers
+  app.setGlobalPrefix('api/v2')
+
   await app.listen(3000);
 }
 bootstrap();
