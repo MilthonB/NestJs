@@ -95,4 +95,8 @@ export class CarsService {
 
     }
 
+    fillCarsWithSeedDate( cars :Car[]){
+        this.car = cars;
+    }
+
 }
