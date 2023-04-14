@@ -9,7 +9,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     ServeStaticModule.forRoot({
   rootPath: join(__dirname,'..','public'),
   }),
-    MongooseModule.forRoot('mongodb://localhost:27018/nest-pokemon'),
+    MongooseModule.forRoot('mongodb://localhost:27018/nest-pokemon'), // conexion a la base de datos
     PokemonModule
   ],
 })
